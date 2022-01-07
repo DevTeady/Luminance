@@ -201,6 +201,12 @@ class Render extends Service {
             $scripts[] = [ 'path'=>'functions/class_storage.js' ];
         }
 
+
+        //Ensure that $extraScripts is an array
+        if (!is_array($extraScripts)) {
+            $extraScripts = [];
+        }
+
         //$extra_scripts[] = 'jquery';       // dependency
         //$extra_scripts[] = 'srchbr';       // handles funky search bars
         $extra_scripts[] = 'svg-injector'; // handles icon injections
