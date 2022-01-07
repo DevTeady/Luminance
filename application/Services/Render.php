@@ -203,8 +203,8 @@ class Render extends Service {
 
 
         //Ensure that $extraScripts is an array
-        if (!is_array($extraScripts)) {
-            $extraScripts = [];
+        if (!is_array($extra_scripts)) {
+            $$extra_scripts = [];
         }
 
         //$extra_scripts[] = 'jquery';       // dependency
