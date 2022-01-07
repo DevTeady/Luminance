@@ -16,6 +16,8 @@ PHP Modules
 * php-mbstring
 * php-memcache
 * php-mysqlnd
+* php-dom
+* php-xml
 
 Composer
 --------
@@ -31,8 +33,10 @@ Database
 You need to create a database before running the Luminance install:
 ```
 mysql -u root -p
-create database luminance;
-grant all privileges on luminance.* to 'luminance'@'localhost' identified by '<DatabasePassword>';
+CREATE DATABASE luminancedb;
+CREATE USER 'luminance'@'localhost' IDENTIFIED BY '<password>';
+GRANT ALL PRIVILEGES ON luminancedb. * TO 'luminance'@'localhost';
+
 ```
 Ensure the database password is both stong and unique, preferably a random string.
 
@@ -42,17 +46,20 @@ To install a brand new instance of Luminance cd into the Luminance directory and
 ```
 php application/entry.php setup configure
 php application/entry.php setup install
+
 ```
 
 To upgrade an existing instance of Luminance cd into the Luminance directory and run this command:
 ```
 php application/entry.php setup upgrade
+
 ```
 
 To migrate from Gazelle cd into the Luminance directory and run these commands:
 ```
 php application/entry.php setup configure ../../path/to/gazelle/classes/config.php
 php application/entry.php setup upgrade
+
 ```
 
 Sphinx
@@ -67,10 +74,12 @@ Cronjobs
 --------
 ```
 crontab -e
+
 ```
 Set the following as contents for the file:
 ```
 0,15,30,45  *  *   *    *       /usr/bin/php /var/www/localhost/application/entry.php schedule >> /root/schedule.log
-*           *  *   *    *       /usr/bin/indexer -c /etc/sphinx/sphinx.conf --rotate delta
-5           *  *   *    *       /usr/bin/indexer -c /etc/sphinx/sphinx.conf --rotate --all
+*           *  *   *    *       /usr/bin/indexer -c /etc/sphinxsearch/sphinx.conf --rotate delta
+5           *  *   *    *       /usr/bin/indexer -c /etc/sphinxsearch/sphinx.conf --rotate --all
+
 ```
